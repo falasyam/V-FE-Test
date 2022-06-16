@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 async function userLogin(credentials) {
@@ -10,9 +10,23 @@ async function userLogin(credentials) {
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
 }
+
+// Title Document
+export function useTitle(title) {
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = title;
+    return () => {
+      document.title = prevTitle;
+    };
+  });
+}
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useTitle("Login");
 
   let navigate = useNavigate();
 
@@ -27,7 +41,7 @@ export default function Login() {
       console.log(response.token);
       navigate("/users");
     } else {
-      alert("Gagal! " + response.error, "error");
+      alert(response.error);
     }
   };
 
@@ -38,7 +52,7 @@ export default function Login() {
           <h1 className="block w-full text-center">Login Page</h1>
         </div>
         <div className="py-4"></div>
-        <div className="w-full bg-white rounded shadow-lg p-8 m-4">
+        <div className="bg-white rounded shadow-lg p-8 m-4">
           <form className="mb-4" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4">
               <label

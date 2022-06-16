@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# VhiWeb Front End Developer Test Case
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Membuat single page application (SPA) sederhana dengan menampilkan data dari API publik.
+
+## Demo
+
+https://v-fe-test.netlify.app
+
+## Tech Stack
+
+ReactJS, TailwindCSS
+
+## User Login
+
+**Email** : eve.holt@reqres.in
+
+**Password** : cityslicka (Namun dapat menggunakan password random)
+
+Jika belum login, maka akan diarahkan ke path utama atau halaman login.
 
 ## Available Scripts
 

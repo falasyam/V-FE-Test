@@ -1,13 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/navbar";
+import Navbar, { useTitle } from "../components/navbar";
 
 export default function UserDetail() {
   let navigate = useNavigate();
 
   const [pengguna, setPengguna] = useState([]);
   const { id } = useParams();
+
+  const token = localStorage.getItem("token");
+
+  useTitle(pengguna.first_name);
+
+  if (!token) {
+    window.location.href = "/";
+  }
 
   useEffect(() => {
     async function fetchUsers() {
@@ -20,7 +28,7 @@ export default function UserDetail() {
         .catch((error) => console.log(error));
     }
     fetchUsers();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -29,9 +37,9 @@ export default function UserDetail() {
       <section className="flex flex-col mx-auto px-8 max-w-full py-8">
         <h1 className="">User Detail</h1>
         <div className="py-4"></div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center items-center content-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 bg-gray-200 p-4 shadow-lg shadow-blue-700/50 justify-items-center items-center content-center">
           <div>
-            <img src={pengguna.avatar} />
+            <img src={pengguna.avatar} alt={pengguna.first_name} />
           </div>
           <div>
             <h1 className="text-center md:text-left text-2xl text-purple-700 font-bold uppercase pb-4">

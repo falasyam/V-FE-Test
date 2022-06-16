@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/navbar";
+import Navbar, { useTitle } from "../components/navbar";
 
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
+
+  useTitle("User List");
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "/";
+  }
 
   useEffect(() => {
     async function fetchUsers() {
@@ -13,6 +21,7 @@ export default function Dashboard() {
       setUsers([...users, ...json.data]);
     }
     fetchUsers();
+    // eslint-disable-next-line
   }, []);
   return (
     <>

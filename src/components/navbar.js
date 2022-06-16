@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -20,4 +22,15 @@ export default function Navbar() {
       </nav>
     </div>
   );
+}
+
+// Title Document
+export function useTitle(title) {
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = title;
+    return () => {
+      document.title = prevTitle;
+    };
+  });
 }
