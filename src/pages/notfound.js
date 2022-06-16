@@ -7,6 +7,7 @@ export default function NotFound() {
     navigate("/");
   };
 
+  // Title Page
   useTitle("404 Page Not Found");
 
   return (

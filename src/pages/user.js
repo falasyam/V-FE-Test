@@ -5,14 +5,16 @@ import Navbar, { useTitle } from "../components/navbar";
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
 
+  // Title Page
   useTitle("User List");
 
+  // Check Token, Jika tidak ada otomatis dialihkan.
   const token = localStorage.getItem("token");
-
   if (!token) {
     window.location.href = "/";
   }
 
+  // Menampilkan user list dari API
   useEffect(() => {
     async function fetchUsers() {
       const response = await fetch("https://reqres.in/api/users/");

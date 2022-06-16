@@ -26,10 +26,12 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Title Page
   useTitle("Login");
 
   let navigate = useNavigate();
 
+  // Jika Tombol Login Dipencet
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await userLogin({
@@ -37,10 +39,12 @@ export default function Login() {
       password,
     });
     if ("token" in response) {
+      // Token akan disimpan di penyimpanan lokal
       localStorage.setItem("token", JSON.stringify(response.token));
       console.log(response.token);
       navigate("/users");
     } else {
+      // Menampilkan Error
       alert(response.error);
     }
   };

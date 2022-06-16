@@ -9,14 +9,16 @@ export default function UserDetail() {
   const [pengguna, setPengguna] = useState([]);
   const { id } = useParams();
 
-  const token = localStorage.getItem("token");
-
+  // Title Page
   useTitle(pengguna.first_name);
 
+  // Check Token, Jika tidak ada otomatis dialihkan.
+  const token = localStorage.getItem("token");
   if (!token) {
     window.location.href = "/";
   }
 
+  // Mengambil data Api
   useEffect(() => {
     async function fetchUsers() {
       axios
